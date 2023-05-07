@@ -4,7 +4,7 @@
 
 ## 1.输出
 
-### 1.1 fmt.Print
+### 1.1 Print
 
 print有三个相关的函数：
 ```
@@ -490,6 +490,19 @@ func main() {
 ```
 panic: 用户名格式不正确： @#$哈哈
 ```
+
+# 2.输入
+
+## 2.1 Scan
+
+```
+func Scan(a ...any) (n int, err error) {
+	return Fscan(os.Stdin, a...)
+}
+```
+从标准输入扫描文本，读取空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。
+
+
 
 
 
