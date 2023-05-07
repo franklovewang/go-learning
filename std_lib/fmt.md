@@ -19,20 +19,64 @@ func Printf(format string, a ...any) (n int, err error) {
 ```
 可以看到，最终调用的都是Fprintf，os.Stdout代表标准输出，即控制台输出。
 
-示例
-```
-func TestPrint(t *testing.T) {
-	fmt.Print("我是控制台输出，不带换行\n")
-	fmt.Println("我是控制台输出，带换行")
-	fmt.Printf("我是格式化输出，%s 占位符\n", "张三")
-}
-```
-
 ### 1.2 格式化占位符
 
 ####  1.2.1 通用占位符
 
 |占位符|说明|
-|--|--|
+|---|---|
 |%v|值的默认格式表示|
+|%+v|类似%v，但输出结构体时会添加字段名|
+|%#v|值的Go语法表示|
+|%T|打印值的类型|
+|%%|百分号|
+
+示例1：
+```
+package main
+
+import "fmt"
+
+type User struct {
+	Id int64
+}
+
+func main() {
+	user := &User{Id: 1}
+	fmt.Printf("%v\n", user)
+	fmt.Printf("%+v\n", user)
+	fmt.Printf("%#v\n", user)
+	fmt.Printf("%T\n", user)
+}
+```
+执行结果如下：
+```
+&{1}
+&{Id:1}
+&main.User{Id:1}
+*main.User
+```
+示例2：
+```
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Printf("%v\n", "123")
+	fmt.Printf("%+v\n", "123")
+	fmt.Printf("%#v\n", "123")
+	fmt.Printf("%T\n", "123")
+}
+```
+执行结果如下：
+```
+123
+123
+"123"
+string
+```
+
+
+
 
