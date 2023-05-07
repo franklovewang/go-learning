@@ -500,16 +500,76 @@ func Scan(a ...any) (n int, err error) {
 	return Fscan(os.Stdin, a...)
 }
 ```
+含义：
 从标准输入扫描文本，读取空白符分隔的值保存到传递给本函数的参数中，换行符视为空白符。
+返回值：
+本函数返回成功扫描的数据个数(n)和遇到的任何错误(error)
 
 
+示例1：
+```
+package main
+
+import "fmt"
+
+func main() {
+	var (
+		name    string
+		age     int
+		married bool
+	)
+	fmt.Scan(&name, &age, &married)
+	fmt.Printf("扫描结果：name: %s age: %d married: %t \n", name, age, married)
+}
+```
+输入：
+```
+frank 22 true
+````
 
 
+示例2：
+```
+package main
 
+import "fmt"
 
+func main() {
+	var (
+		name    string
+		age     int
+		married bool
+	)
+	fmt.Scanf("1:%s 2:%d 3:%t", &name, &age, &married)
+	fmt.Printf("扫描结果：name: %s age: %d married: %t \n", name, age, married)
+}
+```
+输入：
+```
+1:frank 2:22 3:true 
+```
 
+示例3：避免从输入终端输入
+```
+package main
 
+import (
+	"fmt"
+	"strings"
+)
 
-
-
-
+func main() {
+	var (
+		name    string
+		age     int
+		married bool
+	)
+	reader := strings.NewReader("1:frank 2:22 3:true")
+	fmt.Fscanf(reader, "1:%s 2:%d 3:%t", &name, &age, &married)
+	fmt.Printf("扫描结果：name: %s age: %d married: %t \n", name, age, married)
+}
+```
+执行结果如下：
+```
+扫描结果：name: frank age: 22 married: true 
+```
