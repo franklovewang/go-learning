@@ -76,6 +76,29 @@ func main() {
 "123"
 string
 ```
+####  1.2.2 布尔型
+
+|占位符|说明|
+|---|---|
+|%t|true或false|
+
+示例1：
+```
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Printf("%t\n", true)
+	fmt.Printf("%t\n", false)
+}
+```
+执行结果如下：
+```
+true
+false
+```
+
 
 
 
