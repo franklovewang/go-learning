@@ -317,6 +317,124 @@ func main() {
 00000我是字符串
 ```
 
+### 1.3 Fprint
+
+将内容输出一个io.Writer接口类型的变量w中
+
+```
+func Fprint(w io.Writer, a ...any) (n int, err error) {
+	p := newPrinter()
+	p.doPrint(a)
+	n, err = w.Write(p.buf)
+	p.free()
+	return
+}
+
+func Fprintf(w io.Writer, format string, a ...any) (n int, err error) {
+	p := newPrinter()
+	p.doPrintf(format, a)
+	n, err = w.Write(p.buf)
+	p.free()
+	return
+}
+
+func Fprintln(w io.Writer, a ...any) (n int, err error) {
+	p := newPrinter()
+	p.doPrintln(a)
+	n, err = w.Write(p.buf)
+	p.free()
+	return
+}
+```
+n是写入的字节数量，err是返回的错误。一般用在写文件中。
+
+示例1：向控制台输出
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	fmt.Fprint(os.Stdout, "向标准输出 打印字符串\n")
+	fmt.Fprintln(os.Stdout, "向标准输出 打印字符串")
+	fmt.Fprintf(os.Stdout, "你的名字叫：%s\n", "frank")
+}
+```
+执行结果如下：
+```
+向标准输出 打印字符串
+向标准输出 打印字符串
+你的名字叫：frank
+```
+
+示例2：向文件输出
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	file, err := os.OpenFile("./test.txt", os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Fprintf(file, "向文件写入：\n我的名字叫：%s\n", "frank")
+	file.close()
+}
+```
+
+示例三：查看权限标识
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	s := os.FileMode(0644).String()
+	fmt.Printf("s: %v\n", s)
+}
+```
+执行结果如下：
+```
+s: -rw-r--r--
+```
+
+示例4：向浏览器输出
+```
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	http.ListenAndServe(":8080", &MyHandler{})
+}
+
+type MyHandler struct {
+}
+
+func (*MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "向浏览器输出")
+}
+```
+
+
+
+### 1.4 Sprint
+
+### 1.5 Errorf
+
 
 
 
