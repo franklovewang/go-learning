@@ -385,7 +385,7 @@ func main() {
 		panic(err)
 	}
 	fmt.Fprintf(file, "向文件写入：\n我的名字叫：%s\n", "frank")
-	file.close()
+	file.Close()
 }
 ```
 
@@ -429,11 +429,67 @@ func (*MyHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-
-
 ### 1.4 Sprint
 
+把传入的数据生成并返回一个字符串
+
+```
+func Sprint(a ...any) string {
+	p := newPrinter()
+	p.doPrint(a)
+	s := string(p.buf)
+	p.free()
+	return s
+}
+```
+
+示例1：
+```
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	host := "localhost"
+	port := 6379
+	addr := fmt.Sprintf("%s:%d", host, port)
+	fmt.Printf("addr: %v\n", addr)
+}
+```
+执行结果如下：
+```
+addr: localhost:6379
+```
+
 ### 1.5 Errorf
+
+根据format参数生成格式化字符串并返回一个包含该字符串的错误。
+
+```
+func Errorf(format string, a ...any) error
+```
+
+示例1：
+```
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	err := fmt.Errorf("用户名格式不正确： %s", "@#$哈哈")
+	if err != nil {
+		panic(err)
+	}
+}
+```
+执行结果如下：
+```
+panic: 用户名格式不正确： @#$哈哈
+```
 
 
 
