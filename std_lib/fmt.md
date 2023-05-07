@@ -4,3 +4,16 @@
 ## 1.输出
 ### 1.1 fmt.Print
 print有三个相关的函数：
+```
+func Print(a ...any) (n int, err error) {
+  return Fprint(os.Stdout, a...)
+}
+
+func Println(a ...any) (n int, err error) {
+  return Fprintln(os.Stdout, a...)
+}
+
+func Printf(format string, a ...any) (n int, err error) {
+  return Fprintf(os.Stdout, format, a...)
+}
+```
