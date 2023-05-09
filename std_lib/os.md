@@ -31,3 +31,19 @@ c: 字符设备文件（character）
 s: 套接字文件（socket）
 
 p: 管道文件（pipe）
+
+> go中的FileMode定义
+
+```
+type FileMode uint32
+```
+FileMode代表文件的模式和权限位。这些字位在所有操作系统都有相同的含义，因此文件的信息可以在不同的操作系统之间安全的移植。不是所有的位都能用于所有的系统，唯一共有的是用于表示目录的ModeDir位。
+
+```
+const (
+  // 单字符是被String方法用于格式化的属性缩写
+  ModeDir
+)
+```
+
+
