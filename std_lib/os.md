@@ -67,4 +67,48 @@ func Create(name string) (file *File, err error)
 ```
 Create采用模式0666（任何人都可以读写，不可执行）创建一个名为name的文件，如果文件已存在会截断它（为空文件）。如果成功，返回的文件对象可用于I/O；对应的文件描述符具有O_RDWR模式。如果出错，错误底层类型是\*PathError
 
+```
+package main
+
+import (
+	"os"
+)
+
+func main() {
+	// 创建文件
+	f, err := os.Create("test.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+}
+```
+
+## 3 os.Mkdir
+
+创建单个目录
+```
+func Mkdir(name string, perm FileMode) error {
+
+}
+```
+
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	err := os.Mkdir("./std/ms", os.ModePerm)
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}
+```
+
+
 
