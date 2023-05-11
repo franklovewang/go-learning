@@ -110,5 +110,42 @@ func main() {
 }
 ```
 
+## 4 os.MkdirAll
+
+创建多级目录
+
+```
+func MkdirAll(path string, perm FileMode) error {}
+```
+
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	err := os.MkdirAll("./std/ms/a/b", os.ModePerm)
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}
+```
+
+## 5 os.Remove
+
+删除一个空的目录或一个文件
+```
+func Remove(name string) error {}
+```
+
+示例：
+```
+
+```
+
 
 
