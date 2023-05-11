@@ -245,6 +245,81 @@ func main() {
 d:\code\go\gin_study\std <nil>
 ```
 
+## 9 os.TempDir
+
+获得临时目录
+
+```
+func TempDir() string {}
+```
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	s := os.TempDir()
+	fmt.Printf("s: %v\n", s)
+}
+```
+执行结果如下：
+```
+s: C:\Users\CHENMI~1\AppData\Local\Temp
+```
+
+## 10 os.Rename
+
+重命名文件
+```
+func Rename(oldpath, newpath string) error {
+	return rename(oldpath, newpath)
+}
+```
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	f, err := os.Create("./std/old_boy.txt")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+	f.Close()
+	err2 := os.Rename("./std/old_boy.txt", "./std/new_bod.txt")
+	if err2 != nil {
+		fmt.Printf("err2: %v\n", err2)
+	}
+}
+```
+
+## 11 os.Chmod
+
+修改文件权限
+
+```
+func Chmod(name string, mode FileMode) error {
+	return chmod(name, mode)
+}
+```
+
+示例：
+```
+
+```
+
+
+
+
+
 
 
 
