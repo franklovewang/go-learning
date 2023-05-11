@@ -144,8 +144,110 @@ func Remove(name string) error {}
 
 示例：
 ```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	err := os.Remove("./std/ms/a/b")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}
+```
+
+## 6 os.RemoveAll
+
+强制删除多级目录以及目录中的文件
 
 ```
+func RemoveAll(path string) error {}
+```
+
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	err := os.RemoveAll("./std/ms/")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+}
+```
+
+## 7 os.Getwd
+
+获取工作目录
+
+```
+func Getwd() (dir string, err error) {}
+```
+
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	dir, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	} else {
+		fmt.Printf("dir: %v\n", dir)
+	}
+}	
+```
+执行结果如下：
+```
+dir: d:\code\go\gin_study
+```
+
+## 8 os.Chdir
+
+修改工作目录
+
+```
+// 改变工作目录到f，其中f必须为一个目录，否则便会报错
+func Chdir(dir string) error {}
+```
+
+示例：
+```
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+	err := os.Chdir("d:/code/go/gin_study/std")
+	if err != nil {
+		fmt.Printf("err: %v\n", err)
+	}
+	fmt.Println(os.Getwd())
+}
+```
+执行结果如下：
+```
+d:\code\go\gin_study\std <nil>
+```
+
+
+
+
 
 
 
